@@ -17,14 +17,12 @@ import { ContactsService } from './contacts.service';
 
 import { APP_ROUTES } from './app.routes';
 import { API_ENDPOINT } from './app.tokens';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCER } from './state/app.state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [
-    ContactsAppComponent,
-    ContactsListComponent,
-    ContactsDetailComponent,
-    ContactsEditorComponent
-  ],
+  declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,14 +30,14 @@ import { API_ENDPOINT } from './app.tokens';
     FlexLayoutModule,
     RouterModule.forRoot(APP_ROUTES),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot(ROOT_REDUCER, { initialState: {} }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 5
+    })
   ],
-  providers: [
-    ContactsService,
-    { provide: API_ENDPOINT, useValue: 'http://localhost:4201/api' }
-  ],
+  providers: [ContactsService, { provide: API_ENDPOINT, useValue: 'http://localhost:4201/api' }],
   bootstrap: [ContactsAppComponent]
 })
 export class ContactsModule {
-
 }
