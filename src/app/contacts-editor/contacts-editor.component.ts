@@ -17,7 +17,12 @@ export class ContactsEditorComponent implements OnInit {
   // we need to initialize since we can't use ?. operator with ngModel
   contact$: Observable<Contact>;
 
-  constructor(private store: Store<ApplicationState>, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<ApplicationState>,
+    private contactService: ContactsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     const contactId = this.route.snapshot.paramMap.get('id');
@@ -39,8 +44,10 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   save(contact: Contact) {
-    this.store.dispatch(new UpdateContactAction(contact));
-    this.goToDetails(contact);
+    this.contactService.updateContact(contact).subscribe(c => {
+      this.store.dispatch(new UpdateContactAction(c));
+      this.goToDetails(contact);
+    });
   }
 
   private goToDetails(contact: Contact) {
