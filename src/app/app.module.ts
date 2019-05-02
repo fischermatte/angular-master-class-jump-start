@@ -20,6 +20,7 @@ import { API_ENDPOINT } from './app.tokens';
 import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCER } from './state/app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [ContactsAppComponent, ContactsListComponent, ContactsDetailComponent, ContactsEditorComponent],
@@ -34,7 +35,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot(ROOT_REDUCER, { initialState: {} }),
     StoreDevtoolsModule.instrument({
       maxAge: 5
-    })
+    }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [ContactsService, { provide: API_ENDPOINT, useValue: 'http://localhost:4201/api' }],
   bootstrap: [ContactsAppComponent]
