@@ -30,9 +30,7 @@ export function contactsReducer(state: ContactsState = INITIAL_STATE, action: Co
 
       return {
         ...state,
-        list: !inStore
-          ? [...state.list, action.payload]
-          : state.list
+        list: !inStore ? [...state.list, action.payload] : state.list
       };
     case ContactsActionTypes.LOAD_CONTACTS_SUCCESS:
       return {

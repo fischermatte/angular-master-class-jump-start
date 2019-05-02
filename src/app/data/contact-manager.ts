@@ -1,7 +1,6 @@
-import { Contact} from '../models/contact';
+import { Contact } from '../models/contact';
 
 export class ContactManager {
-
   private _contacts: Array<Contact> = [];
 
   get contacts() {
@@ -33,4 +32,3 @@ export class ContactManager {
     return this.contacts;
   }
 }
-

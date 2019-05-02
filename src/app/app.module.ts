@@ -41,5 +41,4 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
   providers: [ContactsService, { provide: API_ENDPOINT, useValue: 'http://localhost:4201/api' }],
   bootstrap: [ContactsAppComponent]
 })
-export class ContactsModule {
-}
+export class ContactsModule {}

@@ -8,5 +8,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(ContactsModule)
+platformBrowserDynamic()
+  .bootstrapModule(ContactsModule)
   .catch(err => console.log(err));

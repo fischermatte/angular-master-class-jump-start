@@ -7,12 +7,11 @@
     bottom: 2em;
     color: #fff;
   }
-
 }
 
 /deep/ mat-list {
   background-color: white;
-  padding-top: 0!important;
+  padding-top: 0 !important;
 }
 
 /deep/ mat-list-item,
@@ -64,7 +63,8 @@
       padding-bottom: 1.5em;
     }
 
-    dt, dd {
+    dt,
+    dd {
       display: inline-block;
       margin-top: 0.5em;
 
@@ -89,22 +89,22 @@
   }
 
   fieldset {
-    legend { color: #ccc; }
+    legend {
+      color: #ccc;
+    }
     border: 1px solid #ddd;
     margin-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
 
-    mat-input-container, mat-select {
+    mat-input-container,
+    mat-select {
       margin-top: 2em;
     }
-
   }
 
   mat-input-container {
-
     &.ng-invalid {
-
       mat-hint {
         color: rgb(215, 65, 57);
       }
@@ -126,7 +126,7 @@
     color: #ccc;
   }
   .mat-radio-outer-circle {
-    border-color: rgba(0,0,0,.12);
+    border-color: rgba(0, 0, 0, 0.12);
   }
 
   .mat-radio-label {
@@ -144,7 +144,7 @@
 }
 
 /deep/ mat-dialog-container {
-  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 
   [mat-dialog-title] {
     margin-left: -24px;
@@ -166,7 +166,8 @@
 
 /deep/ mat-dialog-actions {
   padding: 8px 0;
-  [mat-button],[mat-raised-button] {
+  [mat-button],
+  [mat-raised-button] {
     margin: 0 4px;
   }
 }
@@ -174,4 +175,3 @@
 /deep/ trm-tab > mat-input-container:first-child {
   padding-top: 25px;
 }
-
