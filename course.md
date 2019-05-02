@@ -14,3 +14,7 @@
 - try to avoid nested objects in state wegen kopiererei
   -> or use immerjs for mutation, more efficent
 - an action should be handled by one reducer
+
+## Important
+
+- dont use 2way data binding with ngrx

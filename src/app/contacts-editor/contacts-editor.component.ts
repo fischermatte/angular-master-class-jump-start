@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Contact } from '../models/contact';
 import { ContactsService } from '../contacts.service';
+import { Observable } from 'rxjs';
+import { SelectContactAction, UpdateContactAction } from '../state/contacts/contacts.actions';
+import { select, Store } from '@ngrx/store';
+import { ApplicationState } from '../state/app.state';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'trm-contacts-editor',
@@ -9,17 +14,24 @@ import { ContactsService } from '../contacts.service';
   styleUrls: ['./contacts-editor.component.css']
 })
 export class ContactsEditorComponent implements OnInit {
-
   // we need to initialize since we can't use ?. operator with ngModel
-  contact: Contact = <Contact>{ address: {}};
+  contact$: Observable<Contact>;
 
-  constructor(private contactsService: ContactsService,
-              private router: Router,
-              private route: ActivatedRoute) {}
+  constructor(private store: Store<ApplicationState>, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.contactsService.getContact(this.route.snapshot.paramMap.get('id'))
-                        .subscribe(contact => this.contact = contact);
+    const contactId = this.route.snapshot.paramMap.get('id');
+    this.store.dispatch(new SelectContactAction(+contactId));
+
+    this.contact$ = this.store.pipe(
+      select(state => {
+        const id = state.contacts.selectedContactId;
+        return state.contacts.list.find(contact => {
+          return contact.id === id;
+        });
+      }),
+      map(contact => ({ ...contact }))
+    );
   }
 
   cancel(contact: Contact) {
@@ -27,12 +39,11 @@ export class ContactsEditorComponent implements OnInit {
   }
 
   save(contact: Contact) {
-   this.contactsService.updateContact(contact)
-                       .subscribe(() => this.goToDetails(contact));
+    this.store.dispatch(new UpdateContactAction(contact));
+    this.goToDetails(contact);
   }
 
   private goToDetails(contact: Contact) {
-    this.router.navigate(['/contact', contact.id ]);
+    this.router.navigate(['/contact', contact.id]);
   }
 }
-
